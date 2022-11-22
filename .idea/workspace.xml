@@ -4,11 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d56b275e-b298-409a-b95b-d570bef32b73" name="Changes" comment="" />
+    <list default="true" id="d56b275e-b298-409a-b95b-d570bef32b73" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/WebServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kainos/ea/WebServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/controller/HR.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/dao/EmployeeDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/dao/SalesEmployeeDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/exception/BankNumberLengthException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/exception/DatabaseConnectionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/exception/SalaryTooLowException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/model/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/model/EmployeeRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/model/SalesEmployee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/service/EmployeeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/service/SalesEmployeeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/util/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kainos/ea/util/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kainos/ea/validator/EmployeeValidator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kainos/ea/integration/HRIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kainos/ea/integration/JobApplicationIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kainos/ea/service/EmployeeServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kainos/ea/service/OutlineService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kainos/ea/validator/EmployeeValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kainos/ea/validator/EmployeeValidatorTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -21,16 +48,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/ryan.jones/Documents/Dockerexercise/java-api",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ryan.jones/Desktop/GroupAPI/GroupA_API&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="WebServiceApplication" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.kainos.ea.WebServiceApplication" />
@@ -79,15 +106,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/kainos/ea/controller/HR.java</url>
-          <line>44</line>
-          <properties class="com.kainos.ea.controller.HR" method="getEmployees">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
