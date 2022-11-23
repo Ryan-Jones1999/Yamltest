@@ -1,6 +1,7 @@
 package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.EmployeeDao;
+import com.kainos.ea.exception.DatabaseException;
 import com.kainos.ea.service.EmployeeService;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
@@ -28,11 +29,11 @@ public class JobApplication {
     @GET
     @Path("/viewjobroles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getSalesEmployee () {
+    public Response viewJobRoles () {
         try {
             return Response.ok(employeeservice.viewJobRoles()).build();
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (DatabaseException | SQLException e) {
+            e.printStackTrace();
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
