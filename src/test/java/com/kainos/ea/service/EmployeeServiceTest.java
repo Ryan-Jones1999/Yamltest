@@ -41,7 +41,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void getEmployees_shouldReturnListOfEmployees_whenDaoReturnsEmployees() throws SQLException {
+    void getViewJobRolesshouldReturnListOfJobRoles_whenDaoReturnsEmployees() throws SQLException {
         JobRole result = new JobRole("Test","Test");
         JobRole result2 = new JobRole("Test2", "Test2");
         List<JobRole> expected = new ArrayList<>();
