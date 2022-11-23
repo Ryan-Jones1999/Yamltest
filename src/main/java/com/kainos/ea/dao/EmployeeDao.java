@@ -15,7 +15,7 @@ public class EmployeeDao {
 
     public List<JobRole> getjobroles() {
 
-        String s = "SELECT jobName, jobResponsibility FROM job";
+        String s = "SELECT jobName, jobResponsibility, specification FROM job";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -31,6 +31,7 @@ public class EmployeeDao {
                         rs.getString("jobName"),
                         rs.getString("jobResponsibility")
                 );
+                jobroles.setSpecification(rs.getString("specification"));
                 jobrole.add(jobroles);
             }
 
@@ -53,8 +54,6 @@ public class EmployeeDao {
             PreparedStatement preparedStmt1 = c.prepareStatement(sql);
             System.out.println(jobName);
             preparedStmt1.setString(1, jobName);
-
-            //preparedStmt1.execute();
 
             ResultSet rs = preparedStmt1.executeQuery();
 
