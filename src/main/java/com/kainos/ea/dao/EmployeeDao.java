@@ -15,7 +15,7 @@ public class EmployeeDao {
 
     public List<JobRole> getjobroles() throws SQLException{
 
-        String s = "SELECT jobName, jobResponsibility FROM job";
+        String s = "SELECT jobName FROM job";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -28,8 +28,7 @@ public class EmployeeDao {
             ResultSet rs = preparedStmt1.executeQuery();
             while (rs.next()) {
                 JobRole jobroles = new JobRole(
-                        rs.getString("jobName"),
-                        rs.getString("jobResponsibility")
+                        rs.getString("jobName")
                 );
                 jobrole.add(jobroles);
             }

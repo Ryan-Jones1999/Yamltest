@@ -1,15 +1,12 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.dao.EmployeeDao;
-import com.kainos.ea.exception.DatabaseException;
 import com.kainos.ea.model.JobRole;
-import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class EmployeeServiceTest {
 
     EmployeeDao employeeDao = Mockito.mock(EmployeeDao.class);
-    DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
-
-    EmployeeService employeeService = new EmployeeService(employeeDao);
-
-    JobRole jobroles = new JobRole(
-            "Test",
-            "This a test"
-    );
-
-    Connection conn;
 
     @Test
     void getJobRoles_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException {
@@ -42,8 +29,8 @@ class EmployeeServiceTest {
 
     @Test
     void getViewJobRolesShouldReturnListOfJobRoles_whenDaoReturnsJobRoles() throws SQLException {
-        JobRole result = new JobRole("Test","Test");
-        JobRole result2 = new JobRole("Test2", "Test2");
+        JobRole result = new JobRole("Test");
+        JobRole result2 = new JobRole("Test2");
         List<JobRole> expected = new ArrayList<>();
 
         expected.add(result);
