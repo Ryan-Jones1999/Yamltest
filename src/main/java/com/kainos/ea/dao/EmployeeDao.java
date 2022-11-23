@@ -1,6 +1,6 @@
 package com.kainos.ea.dao;
 
-import com.kainos.ea.model.jobrole;
+import com.kainos.ea.model.JobRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +13,11 @@ import static com.kainos.ea.util.DatabaseConnector.closeConnection;
 import static com.kainos.ea.util.DatabaseConnector.getConnection;
 public class EmployeeDao {
 
-    public List<jobrole> getjobroles() {
+    public List<JobRole> getjobroles() throws SQLException{
 
         String s = "SELECT jobName, jobResponsibility FROM job";
 
-        List<jobrole> jobrole = new ArrayList<>();
+        List<JobRole> jobrole = new ArrayList<>();
 
         try {
             Connection c = getConnection();
@@ -27,7 +27,7 @@ public class EmployeeDao {
 
             ResultSet rs = preparedStmt1.executeQuery();
             while (rs.next()) {
-                jobrole jobroles = new jobrole(
+                JobRole jobroles = new JobRole(
                         rs.getString("jobName"),
                         rs.getString("jobResponsibility")
                 );
