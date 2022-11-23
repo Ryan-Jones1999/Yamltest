@@ -9,7 +9,8 @@ import java.sql.SQLException;
 public class DatabaseConnector {
     private static Connection conn;
 
-    public Connection getConnection() throws DatabaseException, SQLException {
+    //Opens the database connection
+    public static Connection getConnection() throws SQLException {
         String user;
         String password;
         String host;
@@ -20,10 +21,10 @@ public class DatabaseConnector {
         }
 
         try {
-            user            = System.getenv("DB_USERNAME");
-            password        = System.getenv("DB_PASSWORD");
-            host            = System.getenv("DB_HOST");
-            database        = System.getenv("DB_NAME");
+            user = System.getenv("DB_USERNAME");
+            password = System.getenv("DB_PASSWORD");
+            host = System.getenv("DB_HOST");
+            database = System.getenv("DB_NAME");
 
             if (user == null || password == null || host == null)
                 throw new IllegalArgumentException(
@@ -33,10 +34,26 @@ public class DatabaseConnector {
                     + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
 
             System.out.println(conn);
-            
+
             return conn;
         } catch (Exception e) {
-            throw new DatabaseException(e);
+            e.printStackTrace();
+            closeConnection();
+        }
+        return null;
+    }
+
+
+
+
+    public static void closeConnection()  {
+        try{
+            if (conn != null) {
+                conn.close();
+                conn = null;
+            }
+        }catch (SQLException e ){
+            // do something
         }
     }
 }
