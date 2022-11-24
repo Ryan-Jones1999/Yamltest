@@ -13,7 +13,7 @@ import static com.kainos.ea.util.DatabaseConnector.closeConnection;
 import static com.kainos.ea.util.DatabaseConnector.getConnection;
 public class EmployeeDao {
 
-    public List<JobRole> getjobroles() {
+    public List<JobRole> getjobroles() throws SQLException {
 
         String s = "SELECT jobName, jobResponsibility, specification FROM job";
 
@@ -44,7 +44,7 @@ public class EmployeeDao {
         return jobrole;
     }
 
-    public JobRole getSpec(String jobName) {
+    public JobRole getSpec(String jobName) throws SQLException {
         String sql = "select specification from job where jobName=?";
 
         JobRole jobRole = new JobRole(jobName);
