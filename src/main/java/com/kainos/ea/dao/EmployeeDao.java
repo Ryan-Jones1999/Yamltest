@@ -15,7 +15,7 @@ public class EmployeeDao {
 
     public List<JobRole> getjobroles() {
 
-        String s = "SELECT jobName, jobResponsibility, specification FROM job";
+        String s = "SELECT jobName, jobResponsibility, specification, specSummary FROM job";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -32,6 +32,7 @@ public class EmployeeDao {
                         rs.getString("jobResponsibility")
                 );
                 jobroles.setSpecification(rs.getString("specification"));
+                jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobrole.add(jobroles);
             }
 

@@ -1,6 +1,5 @@
 package com.kainos.ea.model;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -11,13 +10,13 @@ public class JobRole {
 
     protected int jobid;
 
-
     protected String jobName;
-
 
     protected String jobResponsibility;
 
     protected String specification;
+
+    protected String specSummary;
 
     @JsonCreator
     public JobRole(
