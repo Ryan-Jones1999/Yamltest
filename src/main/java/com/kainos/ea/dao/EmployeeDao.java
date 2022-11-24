@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.kainos.ea.util.DatabaseConnector.closeConnection;
 import static com.kainos.ea.util.DatabaseConnector.getConnection;
+
 public class EmployeeDao {
 
     public List<JobRole> getjobroles() throws SQLException {
@@ -28,8 +29,7 @@ public class EmployeeDao {
             ResultSet rs = preparedStmt1.executeQuery();
             while (rs.next()) {
                 JobRole jobroles = new JobRole(
-                        rs.getString("jobName"),
-                        rs.getString("jobResponsibility")
+                        rs.getString("jobName")
                 );
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
@@ -72,3 +72,4 @@ public class EmployeeDao {
         return jobRole;
     }
 }
+

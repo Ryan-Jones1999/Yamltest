@@ -23,19 +23,6 @@ public class JobApplication {
 
     public JobApplication (){
         employeeservice = new EmployeeService(new EmployeeDao());
-
-    }
-
-    @GET
-    @Path("/viewjobroles")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response viewJobRoles () {
-        try {
-            return Response.ok(employeeservice.viewJobRoles()).build();
-        } catch (DatabaseException | SQLException e) {
-            e.printStackTrace();
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
-        }
     }
 
     @GET
@@ -49,6 +36,20 @@ public class JobApplication {
         }
     }
 
+    @GET
+    @Path("/viewjobroles")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response viewJobRoles () {
+        try {
+            return Response.ok(employeeservice.viewJobRoles()).build();
+        } catch (DatabaseException e) {
+            e.printStackTrace();
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }
+    }
     @GET
     @Path("/print/{msg}")
     @Produces("text/html")
