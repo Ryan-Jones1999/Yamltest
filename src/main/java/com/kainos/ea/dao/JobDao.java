@@ -12,7 +12,7 @@ import java.util.List;
 import static com.kainos.ea.util.DatabaseConnector.closeConnection;
 import static com.kainos.ea.util.DatabaseConnector.getConnection;
 
-public class EmployeeDao {
+public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
