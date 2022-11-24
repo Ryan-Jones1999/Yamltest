@@ -33,27 +33,22 @@ public class DatabaseConnector {
             conn = DriverManager.getConnection("jdbc:mysql://"
                     + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
 
-            System.out.println(conn);
-
             return conn;
         } catch (Exception e) {
             e.printStackTrace();
             closeConnection();
+
         }
         return null;
     }
-
-
-
-
-    public static void closeConnection()  {
+    public static void closeConnecion() throws SQLException {
         try{
             if (conn != null) {
                 conn.close();
                 conn = null;
             }
-        }catch (SQLException e ){
-            // do something
+        }catch (Exception e ){
+            throw new SQLException();
         }
     }
 }
