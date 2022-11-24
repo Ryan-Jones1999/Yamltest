@@ -41,7 +41,7 @@ public class DatabaseConnector {
         }
         return null;
     }
-    public static void closeConnection() throws SQLException {
+    public static void closeConnecion() throws SQLException {
         try{
             if (conn != null) {
                 conn.close();
