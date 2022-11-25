@@ -45,22 +45,23 @@ public class JobDao {
         return jobrole;
     }
 
-    public JobRole getSpec(String jobName) throws SQLException {
-        String sql = "select specification from job where jobName=?";
+    public JobRole getSpec(int jobid) throws SQLException {
+        String sql = "select specification, specSummary from job where jobid=?";
 
-        JobRole jobRole = new JobRole(jobName);
+        JobRole jobRole = new JobRole(jobid);
 
         try {
             Connection c = getConnection();
             PreparedStatement preparedStmt1 = c.prepareStatement(sql);
-            System.out.println(jobName);
-            preparedStmt1.setString(1, jobName);
+            System.out.println(jobid);
+            preparedStmt1.setInt(1, jobid);
 
             ResultSet rs = preparedStmt1.executeQuery();
 
 
             while (rs.next()) {
                 jobRole.setSpecification(rs.getString("specification"));
+                jobRole.setSpecSummary(rs.getString("specSummary"));
             }
             System.out.println("test");
         } catch (SQLException ex) {

@@ -30,8 +30,8 @@ public class JobService {
         return jobrole;
     }
 
-    public JobRole getSpecificationJob(String name) throws SQLException {
-        return jobDao.getSpec(name);
+    public JobRole getSpecificationJob(int jobid) throws SQLException {
+        return jobDao.getSpec(jobid);
     }
 
 }

@@ -41,7 +41,7 @@ public class JobIntegrationTest {
 
     @Test
     void getSpec_shouldReturnExpectedJobRole() {
-        String response = APP.client().target("http://localhost:8080/api/specification/Trainee%20Software%20Engineer")
+        String response = APP.client().target("http://localhost:8080/api/specification/1")
                 .request()
                 .get(String.class);
 
@@ -50,7 +50,7 @@ public class JobIntegrationTest {
 
     @Test
     void getSpec_shouldReturnAResponseOf200() {
-        Response response = APP.client().target("http://localhost:8080/api/specification/Trainee%20Software%20Engineer")
+        Response response = APP.client().target("http://localhost:8080/api/specification/1")
                 .request().get();
 
         Assertions.assertEquals(200, response.getStatus());
