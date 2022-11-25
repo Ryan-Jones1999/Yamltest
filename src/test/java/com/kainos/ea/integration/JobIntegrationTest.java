@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
-public class JobApplicationIntegrationTest {
+public class JobIntegrationTest {
 
     static final DropwizardAppExtension<WebServiceConfiguration> APP = new DropwizardAppExtension<>(
             WebServiceApplication.class, null,
@@ -38,5 +38,23 @@ public class JobApplicationIntegrationTest {
 
         Assertions.assertEquals(response.getStatus(),200 );
     }
+
+    @Test
+    void getSpec_shouldReturnExpectedJobRole() {
+        String response = APP.client().target("http://localhost:8080/api/specification/Trainee%20Software%20Engineer")
+                .request()
+                .get(String.class);
+
+        Assertions.assertTrue(response.contains("Trainee Software Engineer"));
+    }
+
+    @Test
+    void getSpec_shouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/specification/Trainee%20Software%20Engineer")
+                .request().get();
+
+        Assertions.assertEquals(200, response.getStatus());
+    }
+
 
 }

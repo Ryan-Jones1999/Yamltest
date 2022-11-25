@@ -1,6 +1,6 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.EmployeeDao;
+import com.kainos.ea.dao.JobDao;
 import com.kainos.ea.exception.DatabaseException;
 import com.kainos.ea.model.JobRole;
 
@@ -8,20 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeService {
+public class JobService {
 
-    public com.kainos.ea.dao.EmployeeDao EmployeeDao;
+    public JobDao jobDao;
     public Exception exception;
 
-    public EmployeeService(EmployeeDao dao){
-        this.EmployeeDao = dao;
+    public JobService(JobDao dao){
+        this.jobDao = dao;
         this.exception = new Exception();
     }
 
     public List<JobRole> viewJobRoles() throws DatabaseException, SQLException {
         List<JobRole> jobrole = new ArrayList<>();
 
-        jobrole = EmployeeDao.getjobroles();
+        jobrole = jobDao.getjobroles();
 
         if(jobrole.size() <1){
             throw new DatabaseException(exception);
@@ -29,4 +29,10 @@ public class EmployeeService {
 
         return jobrole;
     }
+
+    public JobRole getSpecificationJob(String name) throws SQLException {
+        return jobDao.getSpec(name);
+    }
+
 }
+

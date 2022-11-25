@@ -1,6 +1,6 @@
 package com.kainos.ea;
 
-import com.kainos.ea.controller.JobApplication;
+import com.kainos.ea.controller.JobController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -31,7 +31,7 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     @Override
     public void run(final WebServiceConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new JobApplication());
+        environment.jersey().register(new JobController());
     }
 
 }

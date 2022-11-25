@@ -41,6 +41,7 @@ public class DatabaseConnector {
         }
         return null;
     }
+
     public static void closeConnection() throws SQLException {
         try{
             if (conn != null) {

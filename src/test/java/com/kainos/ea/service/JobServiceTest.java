@@ -1,6 +1,6 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.EmployeeDao;
+import com.kainos.ea.dao.JobDao;
 import com.kainos.ea.model.JobRole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,16 +15,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-class EmployeeServiceTest {
+class JobServiceTest {
 
-    EmployeeDao employeeDao = Mockito.mock(EmployeeDao.class);
+    JobDao jobDao = Mockito.mock(JobDao.class);
 
     @Test
     void getJobRoles_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException {
-        Mockito.when(employeeDao.getjobroles()).thenThrow(SQLException.class);
+        Mockito.when(jobDao.getjobroles()).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
-                () -> employeeDao.getjobroles());
+                () -> jobDao.getjobroles());
     }
 
     @Test
@@ -36,14 +36,27 @@ class EmployeeServiceTest {
         expected.add(result);
         expected.add(result2);
 
-        Mockito.when(employeeDao.getjobroles()).thenReturn(expected);
+        Mockito.when(jobDao.getjobroles()).thenReturn(expected);
 
         List<JobRole> actual;
 
 
-        actual = employeeDao.getjobroles();
+        actual = jobDao.getjobroles();
 
         assertEquals(expected.size(),actual.size());
+
+    }
+
+    @Test
+    void getSpec_ShouldReturnJobSpec_whenDaoReturnsJob() throws SQLException {
+        JobRole result = new JobRole("Test","Test");
+        result.setSpecification("Test");
+
+        Mockito.when(jobDao.getSpec("Test")).thenReturn(result);
+
+        JobRole actual = jobDao.getSpec("Test");
+
+        assertEquals(result.getSpecification(),actual.getSpecification());
 
     }
 }

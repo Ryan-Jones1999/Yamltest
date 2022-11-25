@@ -1,8 +1,8 @@
 package com.kainos.ea.controller;
 
-import com.kainos.ea.dao.EmployeeDao;
+import com.kainos.ea.dao.JobDao;
 import com.kainos.ea.exception.DatabaseException;
-import com.kainos.ea.service.EmployeeService;
+import com.kainos.ea.service.JobService;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -17,13 +17,23 @@ import java.sql.SQLException;
 
 @Api("API for Job Application app")
 @Path("/api")
-public class JobApplication {
+public class JobController {
 
-    private static com.kainos.ea.service.EmployeeService employeeservice;
+    private static JobService jobService;
 
-    public JobApplication (){
-    employeeservice = new EmployeeService(new EmployeeDao());
+    public JobController(){
+        jobService = new JobService(new JobDao());
+    }
 
+    @GET
+    @Path("/specification/{jobName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJobSpecification(@PathParam("jobName") String name) {
+        try {
+            return Response.ok(jobService.getSpecificationJob(name)).build();
+        } catch(Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GET
@@ -31,7 +41,7 @@ public class JobApplication {
     @Produces(MediaType.APPLICATION_JSON)
     public Response viewJobRoles () {
         try {
-            return Response.ok(employeeservice.viewJobRoles()).build();
+            return Response.ok(jobService.viewJobRoles()).build();
         } catch (DatabaseException e) {
             e.printStackTrace();
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
