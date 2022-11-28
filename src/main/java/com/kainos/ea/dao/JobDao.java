@@ -16,7 +16,7 @@ public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
-        String s = "SELECT job.jobName, job.specification, job.specSummary, jobCapabilities.capabilityName FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
+        String s = "SELECT job.jobName, job.specification, job.specSummary, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public class JobDao {
 
         return jobRole;
     }
-public JobRole getResponsibility(int jobid) throws SQLException {
+    public JobRole getResponsibility(int jobid) throws SQLException {
         String sql = "select jobResponsibility from job where jobid=?";
 
         JobRole jobRole = new JobRole(jobid);
