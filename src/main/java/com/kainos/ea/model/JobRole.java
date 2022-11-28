@@ -33,4 +33,11 @@ public class JobRole {
     ) {
         this.setJobName(jobname);
     }
+
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("jobid") int jobid
+    ) {
+        this.setJobid(jobid);
+    }
 }

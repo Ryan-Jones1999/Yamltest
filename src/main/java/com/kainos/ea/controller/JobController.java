@@ -26,11 +26,11 @@ public class JobController {
     }
 
     @GET
-    @Path("/specification/{jobName}")
+    @Path("/specification/{jobid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobSpecification(@PathParam("jobName") String name) {
+    public Response getJobSpecification(@PathParam("jobid") int jobid) {
         try {
-            return Response.ok(jobService.getSpecificationJob(name)).build();
+            return Response.ok(jobService.getSpecificationJob(jobid)).build();
         } catch(Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
