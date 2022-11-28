@@ -97,6 +97,5 @@ class JobServiceTest {
 
         assertEquals(expected.size(),actual.size());
 
-
     }
 }
