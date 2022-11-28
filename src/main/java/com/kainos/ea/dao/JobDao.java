@@ -100,8 +100,6 @@ public JobRole getResponsibility(int jobid) throws SQLException {
 
     }
 
-
-
     public List<JobRole> getjobwithcapability() throws SQLException {
 
         String s = "SELECT job.jobName, jobCapabilities.capabilityName FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
