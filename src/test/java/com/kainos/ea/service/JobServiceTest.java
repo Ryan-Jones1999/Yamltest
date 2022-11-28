@@ -59,4 +59,17 @@ class JobServiceTest {
         assertEquals(result.getSpecification(),actual.getSpecification());
 
     }
+
+    @Test
+    void getResponsibility_ShouldReturnJobResponsibility_whenDaoReturnsJob() throws SQLException {
+        JobRole result = new JobRole(1);
+        result.setJobResponsibility("Test");
+
+        Mockito.when(jobDao.getSpec(1)).thenReturn(result);
+
+        JobRole actual = jobDao.getSpec(1);
+
+        assertEquals(result.getJobResponsibility(),actual.getJobResponsibility());
+
+    }
 }

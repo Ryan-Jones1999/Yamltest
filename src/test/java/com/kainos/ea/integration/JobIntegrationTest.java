@@ -56,5 +56,22 @@ public class JobIntegrationTest {
         Assertions.assertEquals(200, response.getStatus());
     }
 
+    @Test
+    void getResponsibility_shouldReturnExpectedJobRole() {
+        String response = APP.client().target("http://localhost:8080/api/responsibility/1")
+                .request()
+                .get(String.class);
+
+        Assertions.assertTrue(response.contains("jobResponsibility"));
+    }
+
+    @Test
+    void getResponsibility_shouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/responsibility/1")
+                .request().get();
+
+        Assertions.assertEquals(200, response.getStatus());
+    }
+
 
 }

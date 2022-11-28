@@ -31,6 +31,7 @@ public class JobDao {
                 JobRole jobroles = new JobRole(
                         rs.getString("jobName")
                 );
+                jobroles.setJobResponsibility(rs.getString("jobResponsibility"));
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobrole.add(jobroles);
@@ -63,12 +64,37 @@ public class JobDao {
                 jobRole.setSpecification(rs.getString("specification"));
                 jobRole.setSpecSummary(rs.getString("specSummary"));
             }
-            System.out.println("test");
         } catch (SQLException ex) {
         ex.printStackTrace();
     } finally {
         closeConnection();
     }
+
+        return jobRole;
+    }
+
+    public JobRole getResponsibility(int jobid) throws SQLException {
+        String sql = "select jobResponsibility from job where jobid=?";
+
+        JobRole jobRole = new JobRole(jobid);
+
+        try {
+            Connection c = getConnection();
+            PreparedStatement preparedStmt1 = c.prepareStatement(sql);
+            System.out.println(jobid);
+            preparedStmt1.setInt(1, jobid);
+
+            ResultSet rs = preparedStmt1.executeQuery();
+
+
+            while (rs.next()) {
+                jobRole.setJobResponsibility(rs.getString("jobResponsibility"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
 
         return jobRole;
     }

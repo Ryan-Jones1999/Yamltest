@@ -34,5 +34,9 @@ public class JobService {
         return jobDao.getSpec(jobid);
     }
 
+    public JobRole getResponsibilityJob(int jobid) throws SQLException {
+        return jobDao.getResponsibility(jobid);
+    }
+
 }
 
