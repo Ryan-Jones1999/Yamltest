@@ -18,13 +18,17 @@ public class JobRole {
 
     protected String specSummary;
 
+    protected String capabilityName;
+
     @JsonCreator
     public JobRole(
             @JsonProperty("jobname") String jobname,
-            @JsonProperty("jobResponsibility") String jobResponsibility
+            @JsonProperty("jobResponsibility") String jobResponsibility,
+            @JsonProperty("capabilityName") String capabilityName
     ) {
         this.setJobName(jobname);
         this.setJobResponsibility(jobResponsibility);
+        this.setCapabilityName(capabilityName);
     }
 
     @JsonCreator
@@ -39,5 +43,13 @@ public class JobRole {
             @JsonProperty("jobid") int jobid
     ) {
         this.setJobid(jobid);
+    }
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("jobname") String jobname,
+            @JsonProperty("capabilityName") String capabilityName
+    ) {
+        this.setJobName(jobname);
+        this.setCapabilityName(capabilityName);
     }
 }
