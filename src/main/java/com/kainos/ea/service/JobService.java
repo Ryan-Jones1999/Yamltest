@@ -2,7 +2,6 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobDao;
 import com.kainos.ea.exception.DatabaseException;
-import com.kainos.ea.model.BandLevel;
 import com.kainos.ea.model.JobRole;
 
 import java.sql.SQLException;
@@ -44,12 +43,5 @@ public class JobService {
         }
         return jobrole;
     }
-
-
-    public BandLevel getJobBandLevel(int bandLevelId) throws SQLException {
-        return jobDao.getBandLevel(bandLevelId);
-
-    }
-
 }
 

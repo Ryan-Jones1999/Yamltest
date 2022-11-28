@@ -69,8 +69,8 @@ class JobServiceTest {
 
     @Test
     void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
-        JobRole result = new JobRole("test","Test","Capability 1");
-        JobRole result2 = new JobRole("test","Test","Capability 2");
+        JobRole result = new JobRole("test","Test","Capability 1", 1);
+        JobRole result2 = new JobRole("test","Test","Capability 2", 1);
         List<JobRole> expected = new ArrayList<>();
 
         expected.add(result);

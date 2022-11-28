@@ -1,7 +1,5 @@
 package com.kainos.ea.dao;
 
-import com.kainos.ea.exception.DatabaseException;
-import com.kainos.ea.model.BandLevel;
 import com.kainos.ea.model.JobRole;
 
 import java.sql.Connection;
@@ -18,7 +16,7 @@ public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
-        String s = "SELECT job.jobName, job.specification, job.specSummary, jobCapabilities.capabilityName FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
+        String s = "SELECT job.jobName, job.specification, job.specSummary, job.bandLevelId, jobCapabilities.capabilityName FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -36,6 +34,8 @@ public class JobDao {
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobroles.setCapabilityName(rs.getString("capabilityName"));
+                jobroles.setBandLevelID(rs.getInt("bandLevelId"));
+
                 jobrole.add(jobroles);
             }
 
