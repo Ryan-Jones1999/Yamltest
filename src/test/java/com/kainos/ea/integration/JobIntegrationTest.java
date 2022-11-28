@@ -2,6 +2,7 @@ package com.kainos.ea.integration;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
+import com.kainos.ea.model.BandLevel;
 import com.kainos.ea.model.JobRole;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -60,9 +61,24 @@ public class JobIntegrationTest {
         List<JobRole> response = APP.client().target("http://localhost:8080/api/viewjobcapabilities")
                 .request()
                 .get(List.class);
-
         Assertions.assertTrue(response.size() >0);
     }
+
+    @Test
+    void getBandLevel_shouldReturnExpectedBandLevel() {
+        BandLevel response = APP.client().target("http://localhost:8080/api/bandlevel/2")
+                .request()
+                .get(BandLevel.class);
+        Assertions.assertTrue(response.getBandLevelID() == 2);
+    }
+
+    @Test
+    void viewBandLevel_shouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/bandlevel/2")
+                .request().get();
+        Assertions.assertEquals(response.getStatus(),200 );
+    }
+
     @Test
     void viewJobCapabilities_shouldReturnAResponseOf200() {
         Response response = APP.client().target("http://localhost:8080/api/viewjobcapabilities")

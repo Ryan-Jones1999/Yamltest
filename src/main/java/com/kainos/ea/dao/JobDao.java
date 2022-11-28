@@ -76,6 +76,7 @@ public class JobDao {
 
         return jobRole;
     }
+
     public JobRole getResponsibility(int jobid) throws SQLException {
         String sql = "select jobResponsibility from job where jobid=?";
 
@@ -133,3 +134,4 @@ public class JobDao {
         return jobcapabilities;
     }
 }
+

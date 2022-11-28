@@ -43,7 +43,7 @@ class JobServiceTest {
 
         actual = jobDao.getjobroles();
 
-        assertEquals(expected.size(),actual.size());
+        assertEquals(expected.size(), actual.size());
 
     }
 
@@ -56,7 +56,7 @@ class JobServiceTest {
 
         JobRole actual = jobDao.getSpec(1);
 
-        assertEquals(result.getSpecification(),actual.getSpecification());
+        assertEquals(result.getSpecification(), actual.getSpecification());
 
     }
 
@@ -78,7 +78,7 @@ class JobServiceTest {
         Mockito.when(jobDao.getjobwithcapability()).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
-                    () -> jobDao.getjobwithcapability());
+                () -> jobDao.getjobwithcapability());
     }
 
    @Test
@@ -97,7 +97,7 @@ class JobServiceTest {
 
         actual = jobDao.getjobwithcapability();
 
-        assertEquals(expected.size(),actual.size());
+        assertEquals(expected.size(), actual.size());
 
     }
 }
