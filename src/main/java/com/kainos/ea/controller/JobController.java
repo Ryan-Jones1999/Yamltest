@@ -70,4 +70,18 @@ public class JobController {
     public String getMsg(@PathParam("msg") String message){
         return "Hello from a RESTful Web service: " + message;
     }
+
+
+
+    @GET
+    @Path("/bandlevel/{bandLevelId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBandLevel(@PathParam("bandLevelId") int bandLevelId) {
+        try {
+            return Response.ok(jobService.getJobBandLevel(bandLevelId)).build();
+        } catch(Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.DatabaseException;
+import com.kainos.ea.model.BandLevel;
 import com.kainos.ea.model.JobRole;
 
 import java.sql.Connection;
