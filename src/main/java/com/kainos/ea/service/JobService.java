@@ -2,6 +2,8 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobDao;
 import com.kainos.ea.exception.DatabaseException;
+import com.kainos.ea.exception.NotAValidBandLevelException;
+import com.kainos.ea.model.Competency;
 import com.kainos.ea.model.JobRole;
 
 import java.sql.SQLException;
@@ -46,6 +48,23 @@ public class JobService {
 
     public JobRole getResponsibilityJob(int jobid) throws SQLException {
         return jobDao.getResponsibility(jobid);
+    }
+
+    public List<Competency> competency(int bandID) throws DatabaseException, SQLException, NotAValidBandLevelException {
+
+        if(bandID < 0 || bandID > 8){
+            throw new NotAValidBandLevelException();
+        }
+
+        List<Competency> comp = new ArrayList<>();
+
+        comp = jobDao.getCompetency(bandID);
+
+        if(comp.size() <1){
+            throw new DatabaseException(exception);
+        }
+
+        return comp;
     }
 
 }

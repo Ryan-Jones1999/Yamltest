@@ -1,5 +1,6 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.model.Competency;
 import com.kainos.ea.model.JobRole;
 
 import java.sql.Connection;
@@ -58,7 +59,6 @@ public class JobDao {
         try {
             Connection c = getConnection();
             PreparedStatement preparedStmt1 = c.prepareStatement(sql);
-            System.out.println(jobid);
             preparedStmt1.setInt(1, jobid);
 
             ResultSet rs = preparedStmt1.executeQuery();

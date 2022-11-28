@@ -1,6 +1,7 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobDao;
+import com.kainos.ea.model.Competency;
 import com.kainos.ea.model.JobRole;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
