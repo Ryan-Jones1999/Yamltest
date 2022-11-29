@@ -29,8 +29,6 @@ public class JobRole {
             @JsonProperty("capabilityName") String capabilityName,
             @JsonProperty("bandLevelId") int bandLevelId,
             @JsonProperty("bandName") String bandName
-
-
     ) {
         this.setJobName(jobname);
         this.setJobResponsibility(jobResponsibility);
