@@ -1,44 +1,42 @@
 package com.kainos.ea.model;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-@Getter @Setter
+
+@Getter
+@Setter
 public class JobRole {
 
     protected int jobid;
+
     protected String jobName;
+
     protected String jobResponsibility;
+
     protected String specification;
+
     protected String specSummary;
     protected int bandLevelID;
-<<<<<<< Updated upstream
-=======
     protected String bandName;
->>>>>>> Stashed changes
     protected String capabilityName;
+
     @JsonCreator
     public JobRole(
             @JsonProperty("jobname") String jobname,
             @JsonProperty("jobResponsibility") String jobResponsibility,
             @JsonProperty("capabilityName") String capabilityName,
-<<<<<<< Updated upstream
-            @JsonProperty("bandLevelId") int bandLevelId
-=======
             @JsonProperty("bandLevelId") int bandLevelId,
             @JsonProperty("bandName") String bandName
 
->>>>>>> Stashed changes
 
     ) {
         this.setJobName(jobname);
         this.setJobResponsibility(jobResponsibility);
         this.setCapabilityName(capabilityName);
         this.setBandLevelID(bandLevelId);
-<<<<<<< Updated upstream
-=======
         this.setBandName(bandName);
->>>>>>> Stashed changes
     }
 
     @JsonCreator

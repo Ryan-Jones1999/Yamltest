@@ -16,11 +16,7 @@ public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
-<<<<<<< Updated upstream
-        String s = "SELECT job.jobName, job.specification, job.specSummary, job.bandLevelId, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
-=======
-        String s = "SELECT job.jobName, job.specification, job.specSummary, job.bandLevelId, jobBandLevel.BandName, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId JOIN jobBandLevel on job.bandLevelId = jobBandLevel.bandLevelId";
->>>>>>> Stashed changes
+        String s = "SELECT job.jobName, job.specification, job.specSummary, jobBandLevel.BandName, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId JOIN jobBandLevel on job.bandLevelId = jobBandLevel.bandLevelId";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -39,12 +35,9 @@ public class JobDao {
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobroles.setCapabilityName(rs.getString("capabilityName"));
-                jobroles.setBandLevelID(rs.getInt("bandLevelId"));
-<<<<<<< Updated upstream
-
-=======
                 jobroles.setBandName(rs.getString("bandName"));
->>>>>>> Stashed changes
+                jobroles.setBandLevelID(rs.getInt("bandLevelId"));
+
                 jobrole.add(jobroles);
             }
 
