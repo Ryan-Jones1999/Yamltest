@@ -38,7 +38,7 @@ public class JobService {
         jobrole = jobDao.getjobwithcapability();
 
         if(jobrole.size() <1){
-            throw new DatabaseException("Eror in view job capabilities ", new Exception());
+            throw new DatabaseException("Error in view job capabilities ", new Exception());
         }
         return jobrole;
     }
@@ -49,7 +49,7 @@ public class JobService {
 
     public List<Competency> competency(int bandID) throws DatabaseException, SQLException, NotAValidBandLevelException {
 
-        if(bandID < 0 || bandID > 6){
+        if(bandID < 0 || bandID > 8){
             throw new NotAValidBandLevelException();
         }
 
