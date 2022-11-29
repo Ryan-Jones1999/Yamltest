@@ -16,7 +16,7 @@ public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
-        String s = "SELECT job.jobName, job.specification, job.specSummary, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
+        String s = "SELECT job.jobName, job.specification, job.specSummary, jobBandLevel.BandName, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId JOIN jobBandLevel on job.bandLevelId = jobBandLevel.bandLevelId";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -35,6 +35,9 @@ public class JobDao {
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobroles.setCapabilityName(rs.getString("capabilityName"));
+                jobroles.setBandName(rs.getString("bandName"));
+                jobroles.setBandLevelID(rs.getInt("bandLevelId"));
+
                 jobrole.add(jobroles);
             }
 

@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 public class JobRole {
 
     protected int jobid;
@@ -17,18 +18,23 @@ public class JobRole {
     protected String specification;
 
     protected String specSummary;
-
+    protected int bandLevelID;
+    protected String bandName;
     protected String capabilityName;
 
     @JsonCreator
     public JobRole(
             @JsonProperty("jobname") String jobname,
             @JsonProperty("jobResponsibility") String jobResponsibility,
-            @JsonProperty("capabilityName") String capabilityName
+            @JsonProperty("capabilityName") String capabilityName,
+            @JsonProperty("bandLevelId") int bandLevelId,
+            @JsonProperty("bandName") String bandName
     ) {
         this.setJobName(jobname);
         this.setJobResponsibility(jobResponsibility);
         this.setCapabilityName(capabilityName);
+        this.setBandLevelID(bandLevelId);
+        this.setBandName(bandName);
     }
 
     @JsonCreator

@@ -75,10 +75,4 @@ public class JobController {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
-    @GET
-    @Path("/print/{msg}")
-    @Produces("text/html")
-    public String getMsg(@PathParam("msg") String message){
-        return "Hello from a RESTful Web service: " + message;
-    }
 }
