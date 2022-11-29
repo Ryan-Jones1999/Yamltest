@@ -37,6 +37,17 @@ public class JobController {
     }
 
     @GET
+    @Path("/responsibility/{jobid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJobRes(@PathParam("jobid") int jobid) {
+        try {
+            return Response.ok(jobService.getResponsibilityJob(jobid)).build();
+        } catch(Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GET
     @Path("/viewjobroles")
     @Produces(MediaType.APPLICATION_JSON)
     public Response viewJobRoles () {
