@@ -81,11 +81,18 @@ class JobServiceTest {
                     () -> jobDao.getjobwithcapability());
     }
 
+<<<<<<< Updated upstream
     @Test
     void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
         JobRole result = new JobRole("test","Test","Capability 1", 1);
         JobRole result2 = new JobRole("test","Test","Capability 2", 1);
 
+=======
+   @Test
+   void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
+        JobRole result = new JobRole("test","Test","Capability 1",1, "Engineering");
+        JobRole result2 = new JobRole("test","Test","Capability 2",1, "Engineering");
+>>>>>>> Stashed changes
         List<JobRole> expected = new ArrayList<>();
 
         expected.add(result);
