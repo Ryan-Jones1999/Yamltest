@@ -17,7 +17,7 @@ public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
-        String s = "SELECT job.jobName, job.specification, job.specSummary, jobBandLevel.BandName, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId JOIN jobBandLevel on job.bandLevelId = jobBandLevel.bandLevelId";
+        String s = "SELECT job.jobName, job.specification, job.specSummary, jobBandLevel.BandName, job.bandLevelId, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId JOIN jobBandLevel on job.bandLevelId = jobBandLevel.bandLevelId";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -36,9 +36,8 @@ public class JobDao {
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobroles.setCapabilityName(rs.getString("capabilityName"));
-                jobroles.setBandName(rs.getString("bandName"));
                 jobroles.setBandLevelID(rs.getInt("bandLevelId"));
-
+                jobroles.setBandLevelName(rs.getString("bandName"));
                 jobrole.add(jobroles);
             }
 
@@ -133,5 +132,41 @@ public class JobDao {
         }
         return jobcapabilities;
     }
+
+    public List<Competency> getCompetency(int bandID) throws SQLException {
+
+        String s = "SELECT competency.competencyName, competency_band.competencyId, competency_band.subheading, competency_band.information\n" +
+                "FROM competency_band\n" +
+                "INNER JOIN competency ON competency.competencyId = competency_band.competencyId\n" +
+                "WHERE competency_band.bandLevelId=?\n" +
+                "ORDER BY competency.competencyID ASC;";
+
+        List<Competency> Competency = new ArrayList<>();
+
+        try {
+            Connection c = getConnection();
+            PreparedStatement preparedStmt1 = c.prepareStatement(s);
+            preparedStmt1.setInt(1, bandID);
+            preparedStmt1.execute();
+
+            ResultSet rs = preparedStmt1.executeQuery();
+            while (rs.next()) {
+                Competency comp = new Competency(
+                        rs.getInt("competencyId"),
+                        rs.getString("subheading"),
+                        rs.getString("information")
+                );
+                Competency.add(comp);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return Competency;
+    }
+
 }
 

@@ -44,7 +44,7 @@ class JobServiceTest {
 
         actual = jobDao.getjobroles();
 
-        assertEquals(expected.size(), actual.size());
+        assertEquals(expected.size(),actual.size());
 
     }
 
@@ -57,7 +57,7 @@ class JobServiceTest {
 
         JobRole actual = jobDao.getSpec(1);
 
-        assertEquals(result.getSpecification(), actual.getSpecification());
+        assertEquals(result.getSpecification(),actual.getSpecification());
 
     }
 
@@ -82,10 +82,10 @@ class JobServiceTest {
                 () -> jobDao.getjobwithcapability());
     }
 
-   @Test
-   void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
-        JobRole result = new JobRole("test","Test","Capability 1", 1, "Engineer");
-        JobRole result2 = new JobRole("test","Test","Capability 2", 1, "Engineer");
+    @Test
+    void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
+        JobRole result = new JobRole("test","Test","Summary","Capability", 1,"Trainee");
+        JobRole result2 = new JobRole("test","Test","Summary","Capability", 1,"Trainee");
         List<JobRole> expected = new ArrayList<>();
 
         expected.add(result);
@@ -98,7 +98,34 @@ class JobServiceTest {
 
         actual = jobDao.getjobwithcapability();
 
-        assertEquals(expected.size(), actual.size());
+        assertEquals(expected.size(),actual.size());
+    }
+
+    @Test
+    void getCompetencey_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException {
+        Mockito.when(jobDao.getCompetency(0)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobDao.getCompetency(0));
+    }
+
+    @Test
+    void getCompetencey_ShouldReturnCompetencie_whenDaoReturnsListOfCompetenciesForAValidBand() throws SQLException {
+        Competency result = new Competency(1,"Test", "This is a test");
+        Competency result2 = new Competency(2,"Test2", "This is a test2");
+        List<Competency> expected = new ArrayList<>();
+
+        expected.add(result);
+        expected.add(result2);
+
+        Mockito.when(jobDao.getCompetency(1)).thenReturn(expected);
+
+        List<Competency> actual;
+
+
+        actual = jobDao.getCompetency(1);
+
+        assertEquals(expected.size(),actual.size());
 
     }
 }

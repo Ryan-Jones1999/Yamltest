@@ -2,7 +2,6 @@ package com.kainos.ea.integration;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.model.BandLevel;
 import com.kainos.ea.model.JobRole;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -61,30 +60,15 @@ public class JobIntegrationTest {
         List<JobRole> response = APP.client().target("http://localhost:8080/api/viewjobcapabilities")
                 .request()
                 .get(List.class);
+
         Assertions.assertTrue(response.size() >0);
     }
-
-    @Test
-    void getBandLevel_shouldReturnExpectedBandLevel() {
-        BandLevel response = APP.client().target("http://localhost:8080/api/bandlevel/2")
-                .request()
-                .get(BandLevel.class);
-        Assertions.assertTrue(response.getBandLevelID() == 2);
-    }
-
-    @Test
-    void viewBandLevel_shouldReturnAResponseOf200() {
-        Response response = APP.client().target("http://localhost:8080/api/bandlevel/2")
-                .request().get();
-        Assertions.assertEquals(response.getStatus(),200 );
-    }
-
     @Test
     void viewJobCapabilities_shouldReturnAResponseOf200() {
         Response response = APP.client().target("http://localhost:8080/api/viewjobcapabilities")
                 .request().get();
-                
-         Assertions.assertEquals(response.getStatus(),200 );
+
+        Assertions.assertEquals(response.getStatus(),200 );
     }
 
     @Test
@@ -102,6 +86,29 @@ public class JobIntegrationTest {
                 .request().get();
 
         Assertions.assertEquals(200, response.getStatus());
+    }
+    @Test
+    void getCompetencey_WithAValidBandLevelShouldReturnListOfCompetencies() {
+        List<JobRole> response = APP.client().target("http://localhost:8080/api/viewcompetency/2")
+                .request()
+                .get(List.class);
+
+        Assertions.assertTrue(response.size() >0);
+    }
+
+    @Test
+    void getCompetencey_WithAValidBandLevelShouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/viewcompetency/1")
+                .request().get();
+
+        Assertions.assertEquals(200, response.getStatus());
+    }
+    @Test
+    void getCompetencey_WithAInValidBandLevelShouldReturnAResponseOf500() {
+        Response response = APP.client().target("http://localhost:8080/api/viewcompetency/0")
+                .request().get();
+
+        Assertions.assertEquals(500, response.getStatus());
     }
 
 }
