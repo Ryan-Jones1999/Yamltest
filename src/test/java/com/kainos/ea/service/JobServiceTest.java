@@ -60,15 +60,27 @@ class JobServiceTest {
 
     }
     @Test
+    void getResponsibility_ShouldReturnJobResponsibility_whenDaoReturnsJob() throws SQLException {
+        JobRole result = new JobRole(1);
+        result.setJobResponsibility("Test");
+
+        Mockito.when(jobDao.getSpec(1)).thenReturn(result);
+
+        JobRole actual = jobDao.getSpec(1);
+
+        assertEquals(result.getJobResponsibility(), actual.getJobResponsibility());
+
+    }
+    @Test
     void getJobCapabilities_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException {
         Mockito.when(jobDao.getjobwithcapability()).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
-                () -> jobDao.getjobwithcapability());
+                    () -> jobDao.getjobwithcapability());
     }
 
-    @Test
-    void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
+   @Test
+   void getViewJobCapabilitiesShouldReturnListOfJobCapabilities_whenDaoReturnsJobCapabilities() throws SQLException {
         JobRole result = new JobRole("test","Test","Capability 1");
         JobRole result2 = new JobRole("test","Test","Capability 2");
         List<JobRole> expected = new ArrayList<>();

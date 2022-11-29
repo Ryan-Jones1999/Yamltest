@@ -16,7 +16,7 @@ public class JobDao {
 
     public List<JobRole> getjobroles() throws SQLException {
 
-        String s = "SELECT job.jobName, job.specification, job.specSummary, jobCapabilities.capabilityName FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
+        String s = "SELECT job.jobName, job.specification, job.specSummary, jobCapabilities.capabilityName, job.jobResponsibility FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
 
         List<JobRole> jobrole = new ArrayList<>();
 
@@ -31,6 +31,7 @@ public class JobDao {
                 JobRole jobroles = new JobRole(
                         rs.getString("jobName")
                 );
+                jobroles.setJobResponsibility(rs.getString("jobResponsibility"));
                 jobroles.setSpecification(rs.getString("specification"));
                 jobroles.setSpecSummary(rs.getString("specSummary"));
                 jobroles.setCapabilityName(rs.getString("capabilityName"));
@@ -64,7 +65,6 @@ public class JobDao {
                 jobRole.setSpecification(rs.getString("specification"));
                 jobRole.setSpecSummary(rs.getString("specSummary"));
             }
-            System.out.println("test");
         } catch (SQLException ex) {
         ex.printStackTrace();
     } finally {
@@ -73,6 +73,33 @@ public class JobDao {
 
         return jobRole;
     }
+    public JobRole getResponsibility(int jobid) throws SQLException {
+        String sql = "select jobResponsibility from job where jobid=?";
+
+        JobRole jobRole = new JobRole(jobid);
+
+        try {
+            Connection c = getConnection();
+            PreparedStatement preparedStmt1 = c.prepareStatement(sql);
+            System.out.println(jobid);
+            preparedStmt1.setInt(1, jobid);
+
+            ResultSet rs = preparedStmt1.executeQuery();
+
+
+            while (rs.next()) {
+                jobRole.setJobResponsibility(rs.getString("jobResponsibility"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return jobRole;
+
+    }
+
     public List<JobRole> getjobwithcapability() throws SQLException {
 
         String s = "SELECT job.jobName, jobCapabilities.capabilityName FROM job JOIN jobCapabilities on job.capabilityId = jobCapabilities.capabilityId";
@@ -103,4 +130,3 @@ public class JobDao {
         return jobcapabilities;
     }
 }
-

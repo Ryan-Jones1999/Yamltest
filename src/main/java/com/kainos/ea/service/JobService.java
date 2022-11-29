@@ -44,5 +44,9 @@ public class JobService {
         return jobrole;
     }
 
+    public JobRole getResponsibilityJob(int jobid) throws SQLException {
+        return jobDao.getResponsibility(jobid);
+    }
+
 }
 
