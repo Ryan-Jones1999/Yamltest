@@ -1,8 +1,10 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobDao;
+import com.kainos.ea.exception.RoleNotAddedException;
 import com.kainos.ea.model.Competency;
 import com.kainos.ea.model.JobRole;
+import com.kainos.ea.model.NewRoleRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -203,5 +205,60 @@ class JobServiceTest {
 
         assertThrows(SQLException.class,
                 () -> jobDao.populateCapabilityList());
+    }
+
+    @Test
+    void postAddNewRole_ShouldReturnNewRole_whenDaoReturnsNewRole() throws SQLException, RoleNotAddedException {
+
+        NewRoleRequest newrole = new NewRoleRequest(
+                "This is a test",
+                "This is a test",
+                "This is also a test",
+                1,
+                1,
+                1
+        );
+
+        Mockito.when(jobDao.Addnewjobrole(newrole)).thenReturn(newrole);
+
+        NewRoleRequest actual;
+
+        actual = jobDao.Addnewjobrole(newrole);
+
+        assertEquals(newrole,actual);
+    }
+
+    @Test
+    void postAddNewRole_ShouldReturnSQLException_whenDaoReturnsSQLException() throws SQLException, RoleNotAddedException {
+
+        NewRoleRequest newrole = new NewRoleRequest(
+                "This is a test",
+                "This is a test",
+                "This is also a test",
+                1,
+                1,
+                1
+        );
+        Mockito.when(jobDao.Addnewjobrole(newrole)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobDao.Addnewjobrole(newrole));
+    }
+
+    @Test
+    void postAddNewRole_ShouldReturnRoleNotAddedException_whenDaoReturnsRoleNotAddedException() throws SQLException, RoleNotAddedException {
+
+        NewRoleRequest newrole = new NewRoleRequest(
+                "This is a test",
+                "This is a test",
+                "This is also a test",
+                1,
+                1,
+                1
+        );
+        Mockito.when(jobDao.Addnewjobrole(newrole)).thenThrow(RoleNotAddedException.class);
+
+        assertThrows(RoleNotAddedException.class,
+                () -> jobDao.Addnewjobrole(newrole));
     }
 }

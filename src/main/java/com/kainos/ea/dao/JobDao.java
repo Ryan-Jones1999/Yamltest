@@ -265,7 +265,6 @@ public class JobDao {
     }
 
     public NewRoleRequest Addnewjobrole (NewRoleRequest addedRole) throws SQLException, RoleNotAddedException {
-        System.out.println(addedRole.getJobResponsibility());
         int id =0;
         try {
             Connection c = getConnection();

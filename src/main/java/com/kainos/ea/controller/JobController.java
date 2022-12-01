@@ -7,6 +7,7 @@ import com.kainos.ea.exception.RoleNotAddedException;
 import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.NewRoleRequest;
 import com.kainos.ea.service.JobService;
+import com.kainos.ea.validator.NewJobRoleValidation;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -23,9 +24,11 @@ import java.util.List;
 public class JobController {
 
     private static JobService jobService;
+    private static NewJobRoleValidation roleValidation;
 
     public JobController(){
         jobService = new JobService(new JobDao());
+        roleValidation = new NewJobRoleValidation();
     }
 
     @GET
@@ -129,8 +132,12 @@ public class JobController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addNewRole (NewRoleRequest newrolerequest) {
         try {
-            NewRoleRequest newrole = jobService.addNewRole(newrolerequest);
-            return Response.status(HttpStatus.CREATED_201).entity(newrole).build();
+            if (roleValidation.isValid(newrolerequest)) {
+                NewRoleRequest newrole = jobService.addNewRole(newrolerequest);
+                return Response.status(HttpStatus.CREATED_201).entity(newrole).build();
+            }else{
+                return Response.status(HttpStatus.BAD_REQUEST_400).build();
+            }
         } catch (DatabaseException | SQLException | RoleNotAddedException e) {
             e.printStackTrace();
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
