@@ -1,5 +1,7 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.InvalidEmailException;
+import com.kainos.ea.exception.InvalidPasswordException;
 import com.kainos.ea.model.Token;
 import com.kainos.ea.model.User;
 
@@ -14,6 +16,14 @@ public class UserDao {
 
     public Token register(User user) {
         try {
+
+            if (user.getPassword() == null) {
+                throw new InvalidPasswordException();
+            }
+            if (!user.getEmail().contains("@")) {
+                throw new InvalidEmailException();
+            }
+
             Connection c = getConnection();
             String insertQuery = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
 
@@ -31,8 +41,8 @@ public class UserDao {
             } else {
                 return null;
             }
-            } catch (SQLException e) {
+            } catch (SQLException | InvalidPasswordException | InvalidEmailException e) {
                 throw new RuntimeException(e);
-            }
+        }
     }
 }
