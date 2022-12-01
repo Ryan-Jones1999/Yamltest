@@ -3,6 +3,7 @@ package com.kainos.ea.controller;
 import com.kainos.ea.dao.UserDao;
 import com.kainos.ea.model.User;
 import com.kainos.ea.service.UserService;
+
 import io.swagger.annotations.Api;
 
 import javax.ws.rs.Consumes;

@@ -1,6 +1,8 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.dao.UserDao;
+
+import com.kainos.ea.model.Token;
 import com.kainos.ea.model.User;
 
 import java.sql.SQLException;
@@ -13,7 +15,7 @@ public class UserService {
         this.userDao = dao;
     }
 
-    public boolean registerUser(User user) throws SQLException {
+    public Token registerUser(User user) throws SQLException {
         return userDao.register(user);
     }
 }

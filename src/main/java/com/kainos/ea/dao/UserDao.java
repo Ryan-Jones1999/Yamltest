@@ -1,5 +1,6 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.model.Token;
 import com.kainos.ea.model.User;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import static com.kainos.ea.util.DatabaseConnector.getConnection;
 
 public class UserDao {
 
-    public boolean register(User user) {
+    public Token register(User user) {
         try {
             Connection c = getConnection();
             String insertQuery = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
@@ -21,13 +22,17 @@ public class UserDao {
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getRole());
 
+
             if(preparedStatement.executeUpdate() > 0) {
-                return true;
+                Token token = new Token("");
+                token.generateToken(user);
+
+                return token;
             } else {
-                return false;
+                return null;
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
     }
 }
