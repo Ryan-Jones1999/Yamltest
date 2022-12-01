@@ -3,17 +3,19 @@ package com.kainos.ea.controller;
 import com.kainos.ea.dao.JobDao;
 import com.kainos.ea.exception.DatabaseException;
 import com.kainos.ea.exception.NotAValidBandLevelException;
+import com.kainos.ea.exception.RoleNotAddedException;
+import com.kainos.ea.model.JobRole;
+import com.kainos.ea.model.NewRoleRequest;
 import com.kainos.ea.service.JobService;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Api("API for Job Application app")
@@ -82,4 +84,57 @@ public class JobController {
         }
     }
 
+    @GET
+    @Path("/populatefamilylist")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response populateFamilyLists () {
+        try {
+             return Response.ok(jobService.populateFamilyLists()).build();
+        } catch (DatabaseException | SQLException e) {
+            e.printStackTrace();
+             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+
+        }
+    }
+
+    @GET
+    @Path("/populatecapabiltylist")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response populateCapabiltyList () {
+        try {
+            return Response.ok(jobService.populateCapabiltyLists()).build();
+        } catch (DatabaseException | SQLException e) {
+            e.printStackTrace();
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+
+        }
+    }
+
+    @GET
+    @Path("/populatebandlevelist")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response populateBandLevelList () {
+        try {
+            return Response.ok(jobService.populateBandLists()).build();
+        } catch (DatabaseException | SQLException e) {
+            e.printStackTrace();
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+
+        }
+    }
+
+    @POST
+    @Path("/addnewrole")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addNewRole (NewRoleRequest newrolerequest) {
+        try {
+            NewRoleRequest newrole = jobService.addNewRole(newrolerequest);
+            return Response.status(HttpStatus.CREATED_201).entity(newrole).build();
+        } catch (DatabaseException | SQLException | RoleNotAddedException e) {
+            e.printStackTrace();
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+
+        }
+    }
 }

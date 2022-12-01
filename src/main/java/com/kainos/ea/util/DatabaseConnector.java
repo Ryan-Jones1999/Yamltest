@@ -24,7 +24,7 @@ public class DatabaseConnector {
             user = System.getenv("DB_USERNAME");
             password = System.getenv("DB_PASSWORD");
             host = System.getenv("DB_HOST");
-            database = System.getenv("DB_NAME");
+            database = System.getenv("DB_DEVNAME");
 
             if (user == null || password == null || host == null)
                 throw new IllegalArgumentException(

@@ -1,12 +1,12 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.RoleNotAddedException;
 import com.kainos.ea.model.Competency;
 import com.kainos.ea.model.JobRole;
+import com.kainos.ea.model.NewRoleRequest;
+import com.mysql.cj.jdbc.exceptions.SQLError;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -167,5 +167,134 @@ public class JobDao {
         }
 
         return Competency;
+    }
+
+    public List<JobRole> populateFamilyLists() throws SQLException {
+
+        List<JobRole> Jobroles = new ArrayList<>();
+
+        try {
+            Connection c = getConnection();
+            String capability = "SELECT capabilityId, capabilityName from jobCapabilities";
+            String family ="SELECT jobFamilyId, familyName from jobFamily";
+            PreparedStatement preparedStmt1 = Objects.requireNonNull(c).prepareStatement(family);
+
+            preparedStmt1.execute();
+
+            ResultSet rs = preparedStmt1.executeQuery();
+
+            while (rs.next()) {
+                JobRole job = new JobRole(
+                  rs.getInt("jobFamilyId"),
+                  rs.getString("familyName")
+                );
+
+                Jobroles.add(job);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return Jobroles;
+    }
+
+    public List<JobRole> populateCapabilityList() throws SQLException {
+
+        List<JobRole> Jobroles = new ArrayList<>();
+
+        try {
+            Connection c = getConnection();
+            String capability = "SELECT capabilityId, capabilityName from jobCapabilities";
+
+            PreparedStatement preparedStmt1 = Objects.requireNonNull(c).prepareStatement(capability);
+
+            preparedStmt1.execute();
+
+            ResultSet rs = preparedStmt1.executeQuery();
+
+            while (rs.next()) {
+                JobRole job = new JobRole(
+                        rs.getInt("capabilityId"),
+                        rs.getString("capabilityName")
+                );
+
+                Jobroles.add(job);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return Jobroles;
+    }
+
+    public List<JobRole> populateBandLevelList() throws SQLException {
+
+        List<JobRole> Jobroles = new ArrayList<>();
+
+        try {
+            Connection c = getConnection();
+            String band = "SELECT bandLevelId, BandName from jobBandLevel";
+            PreparedStatement preparedStmt1 = Objects.requireNonNull(c).prepareStatement(band);
+
+            preparedStmt1.execute();
+
+            ResultSet rs = preparedStmt1.executeQuery();
+
+            while (rs.next()) {
+                JobRole job = new JobRole(
+                        rs.getInt("bandLevelId"),
+                        rs.getString("BandName")
+                );
+
+                Jobroles.add(job);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return Jobroles;
+    }
+
+    public NewRoleRequest Addnewjobrole (NewRoleRequest addedRole) throws SQLException, RoleNotAddedException {
+        System.out.println(addedRole.getJobResponsibility());
+        int id =0;
+        try {
+            Connection c = getConnection();
+            String band = "INSERT INTO job (jobName, jobResponsibility, specSummary, bandLevelId, jobFamilyId, capabilityId) VALUES (?,?,?,?,?,?);";
+
+
+            PreparedStatement preparedStmt1 = Objects.requireNonNull(c).prepareStatement(band, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt1.setString(1, addedRole.getJobName());
+            preparedStmt1.setString(2, addedRole.getJobResponsibility());
+            preparedStmt1.setString(3, addedRole.getSpecSummary());
+            preparedStmt1.setInt(4, addedRole.getBandLevelID());
+            preparedStmt1.setInt(5, addedRole.getJobFamilyID());
+            preparedStmt1.setInt(6, addedRole.getCapabilityID());
+            preparedStmt1.execute();
+
+            ResultSet rs = preparedStmt1.getGeneratedKeys();
+
+            while (rs.next()) {
+             id = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        if(id <0){
+        throw new RoleNotAddedException("Role has not been added", new Exception());
+        }
+        return addedRole;
     }
 }

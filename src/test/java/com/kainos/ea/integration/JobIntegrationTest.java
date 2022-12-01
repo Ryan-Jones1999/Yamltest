@@ -111,4 +111,52 @@ public class JobIntegrationTest {
         Assertions.assertEquals(500, response.getStatus());
     }
 
+    @Test
+    void getFamilyList_ShouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/populatefamilylist")
+                .request().get();
+
+        Assertions.assertEquals(200, response.getStatus());
+    }
+
+    @Test
+    void getFamilyList_ShouldReturnAList() {
+        List<JobRole> response = APP.client().target("http://localhost:8080/api/populatefamilylist")
+                .request().get(List.class);
+
+        Assertions.assertTrue(response.size() >0);
+    }
+
+    @Test
+    void getBandList_ShouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/populatebandlevelist")
+                .request().get();
+
+        Assertions.assertEquals(200, response.getStatus());
+    }
+
+    @Test
+    void getBandList_ShouldReturnAList() {
+        List<JobRole> response = APP.client().target("http://localhost:8080/api/populatebandlevelist")
+                .request().get(List.class);
+
+        Assertions.assertTrue(response.size() >0);
+    }
+
+    @Test
+    void getCapabilityList_ShouldReturnAResponseOf200() {
+        Response response = APP.client().target("http://localhost:8080/api/populatecapabiltylist")
+                .request().get();
+
+        Assertions.assertEquals(200, response.getStatus());
+    }
+
+    @Test
+    void getCapabilityList_ShouldReturnAList() {
+        List<JobRole> response = APP.client().target("http://localhost:8080/api/populatecapabiltylist")
+                .request().get(List.class);
+
+        Assertions.assertTrue(response.size() >0);
+    }
+
 }

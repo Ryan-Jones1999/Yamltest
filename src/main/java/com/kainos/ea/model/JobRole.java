@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class JobRole {
@@ -19,11 +21,26 @@ public class JobRole {
 
     protected String specSummary;
 
+    protected int capabilityID;
+
     protected String capabilityName;
 
     protected int bandLevelID;
 
     protected String bandLevelName;
+
+    protected int jobFamilyID;
+
+    protected int listID;
+
+    protected String listName;
+
+    protected String name;
+
+    protected List<JobRole> object;
+
+    public JobRole() {
+    }
 
     @JsonCreator
     public JobRole(
@@ -56,6 +73,16 @@ public class JobRole {
     ) {
         this.setJobid(jobid);
     }
+
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("listID") int listID,
+            @JsonProperty("listName") String listName
+    ) {
+     this.setListID(listID);
+     this.setListName(listName);
+    }
+
     @JsonCreator
     public JobRole(
             @JsonProperty("jobname") String jobname,
@@ -64,4 +91,24 @@ public class JobRole {
         this.setJobName(jobname);
         this.setCapabilityName(capabilityName);
     }
+
+    @JsonCreator
+    public JobRole(
+            @JsonProperty("jobName") String jobName,
+            @JsonProperty("jobResponsibility") String jobResponsibilty,
+            @JsonProperty("specSummary") String spec,
+            @JsonProperty("bandLevelId") int bandLevelID,
+            @JsonProperty("jobFamilyId") int jobFamilyID,
+            @JsonProperty("capabilityId") int capabilityID
+    ) {
+        this.setJobName(jobName);
+        this.setJobResponsibility(jobResponsibilty);
+        this.setSpecSummary(spec);
+        this.setBandLevelID(bandLevelID);
+        this.setJobFamilyID(jobFamilyID);
+        this.setCapabilityID(capabilityID);
+    }
+
+
+
 }
